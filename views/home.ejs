@@ -1,0 +1,28 @@
+<div class= "container col-10 mt-5">
+	<div class= "title col-12"> 
+		<span class=' offset-1'>
+			All Blogs
+		<span>
+		<a href= '/blogs/new'>&#43</a>
+	</div>
+	<div>
+		<% all_users.forEach((user)=>{ 
+			user.blogs.forEach((blog)=>{ %>
+				<div class= "container col-11 col-lg-10 blog">
+					<h3 class= "blog_title"><%= blog.title %><%= user.username %></h3>
+					<div class= "blog_content"><%= blog.content %></div>
+					
+					<% if(user.email === authorized_user.email){ %>
+
+					<div class= "buttons">
+						<div>
+							<a href= "#" class= "btn btn-primary" data-id= <%= blog.id %> >Read More</a>
+						</div>
+					</div>
+
+					<% } %>
+				</div>
+			<% })
+		}) %>
+	</div>
+</div>

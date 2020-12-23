@@ -1,0 +1,9 @@
+<div>
+	<h2>All Blogs<a href= '/blogs/new'>&#43</a></h2>
+</div>
+<div>
+	<% curr_user.blogs.forEach((blog)=>{ %>
+		<h3><%= blog.title %><%= curr_user.username %></h3>
+		<div><%= blog.content %></div>
+	<% }) %>
+</div>
