@@ -6,7 +6,7 @@ mongoose.connect('mongodb://localhost/blogs', { useUnifiedTopology: true, useNew
 	console.log("DataBase Connected");
 })
 
-const Schema= mongoose.Schema;
+const schema= mongoose.Schema;
 
 var userSchema= new schema({
 	username: {
@@ -16,7 +16,7 @@ var userSchema= new schema({
 	email: {
 		type: String,
 		required: true,
-		unique: true;
+		unique: true
 	},
 	password: {
 		type: String,
