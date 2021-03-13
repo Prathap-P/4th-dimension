@@ -2,9 +2,10 @@ var express= require('express');
 var router= express.Router();
 var mongoose= require('mongoose');
 var models= require('../models/mongoose');
-// var isAuthenticated= require("./authentication").isAuthenticated;
+var isAuthenticated= require("./authentication").isAuthenticated;
 
-router.get('/new', checkAnonymous, (req, res)=>{
+
+router.get('/new', isAuthenticated, (req, res)=>{
 	
 	var options= {
 		layout: 'layouts/userLayout'
@@ -13,9 +14,9 @@ router.get('/new', checkAnonymous, (req, res)=>{
 	res.render('newBlog.ejs', options);
 })
 
-router.get('/user', checkAnonymous, async(req, res)=>{
+router.get('/user', isAuthenticated, async(req, res)=>{
 	var curr_user;
-	curr_user= await models.userModel.findOne({ email: req.user.email 		}).populate("blogs");
+	curr_user= await models.userModel.findOne({ email: res.locals.user 		}).populate("blogs");
 	
 	var options= {
 		layout: 'layouts/userLayout',
@@ -25,12 +26,6 @@ router.get('/user', checkAnonymous, async(req, res)=>{
 	res.render('your_blogs.ejs', options);
 })
 
-function checkAnonymous(req, res, next){
-	if(req.user){
-		return next();
-	}
-	res.redirect("/login");
-}
 
 router.post('/new',async (req, res)=>{
 	try{
@@ -41,7 +36,7 @@ router.post('/new',async (req, res)=>{
 		});
 		console.log(blog);
 		await blog.save();
-		models.userModel.findById(req.user.id, (err, user)=>{
+		models.userModel.findOneById(req.user.id, (err, user)=>{
 			if (err) throw err;
 			user.blogs.push(blog);
 			user.save();

@@ -2,9 +2,10 @@ const mongoose= require('mongoose');
 
 mongoose.connect('mongodb://localhost/blogs', { useUnifiedTopology: true, useNewUrlParser: true })
 .then((db)=> {
-	// console.log(db);
 	console.log("DataBase Connected");
 })
+
+mongoose.set('useCreateIndex', true);
 
 const schema= mongoose.Schema;
 
