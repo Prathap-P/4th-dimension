@@ -4,6 +4,7 @@ var mongoose= require('mongoose');
 var models= require('../models/mongoose');
 var isAuthenticated= require("./authentication").isAuthenticated;
 
+router.use(express.static('public'));
 
 router.get('/new', isAuthenticated, (req, res)=>{
 	
@@ -16,7 +17,7 @@ router.get('/new', isAuthenticated, (req, res)=>{
 
 router.get('/user', isAuthenticated, async(req, res)=>{
 	var curr_user;
-	curr_user= await models.userModel.findOne({ email: res.locals.user 		}).populate("blogs");
+	curr_user= await models.userModel.findOne({ email: res.locals.user }).populate("blogs");
 	
 	var options= {
 		layout: 'layouts/userLayout',
@@ -27,14 +28,14 @@ router.get('/user', isAuthenticated, async(req, res)=>{
 })
 
 
-router.post('/new',async (req, res)=>{
+router.post('/new', async(req, res)=>{
 	try{
 		var blog= new models.blogModel({
 			title: req.body.title,
 			content: req.body.content,
 			author: req.user.id
 		});
-		console.log(blog);
+		// console.log(blog);
 		await blog.save();
 		models.userModel.findOneById(req.user.id, (err, user)=>{
 			if (err) throw err;
@@ -42,7 +43,8 @@ router.post('/new',async (req, res)=>{
 			user.save();
 			console.log("New Blog saved");
 		});
-			res.redirect('/');
+		
+		res.redirect('/');
 	}catch(e){
 		console.log(e);
 	}
@@ -54,5 +56,7 @@ router.post('/new',async (req, res)=>{
 // });
 
 
-module.exports= router;
+module.exports= {
+	blogRouter : router	
+};
 

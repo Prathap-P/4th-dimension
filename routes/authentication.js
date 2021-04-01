@@ -5,7 +5,6 @@ var jwt= require('jsonwebtoken');
 var cookieParser= require('cookie-parser');
 var bcrypt= require('bcrypt');
 var models= require('../models/mongoose');
-// var passport= require('passport');
 
 const userLayout= 'layouts/userLayout';
 
@@ -28,8 +27,7 @@ async function isAuthenticated(req, res, next){
 
 	}
 	catch(e){
-		// console.log(e);
-		res.redirect('/login');
+		res.redirect('/login' + `?redirect=${req.originalUrl}`);
 	}
 }
 
@@ -73,12 +71,13 @@ authenRouter.post('/register', async(req, res)=>{
 
 
 authenRouter.get('/login', (req, res)=>{
+	// console.log(req);
 	res.render('login.ejs');
 });
 
 
 authenRouter.post('/login', async(req, res)=>{
-
+	// console.log(req.query);
 	const userEmail= req.body.email, userPassword= req.body.password;
 
 	try{
@@ -99,19 +98,19 @@ authenRouter.post('/login', async(req, res)=>{
 		const tokenGenerated= jwt.sign({email : userEmail}, process.env.SECRET);
 		res.cookie('token', tokenGenerated, {httpOnly : true});
 
-		res.redirect('/');
+		// console.log(req);
+		res.redirect(req.query.redirect || '/');
 
 	}catch(e){
-		console.log(e);
-		res.redirect('/login');
+		res.redirect(req.url);
+
 	}
 
 });
 
 authenRouter.get('/logout', (req, res)=>{
 	res.clearCookie('token');
-	console.log(req.cookies['token']);
-	return res.redirect('/login');
+	res.redirect('/login');
 });
 
 module.exports= {
