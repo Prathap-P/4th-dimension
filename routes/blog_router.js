@@ -16,8 +16,7 @@ router.get('/new', isAuthenticated, (req, res)=>{
 })
 
 router.get('/user', isAuthenticated, async(req, res)=>{
-	var curr_user;
-	curr_user= await models.userModel.findOne({ email: res.locals.user }).populate("blogs");
+	var curr_user= await models.userModel.findOneById(res.locals.userId).populate("blogs");
 	
 	var options= {
 		layout: 'layouts/userLayout',
@@ -28,21 +27,22 @@ router.get('/user', isAuthenticated, async(req, res)=>{
 })
 
 
-router.post('/new', async(req, res)=>{
+router.post('/new', isAuthenticated, async(req, res)=>{
 	try{
-		var blog= new models.blogModel({
+		var blog= await new models.blogModel({
 			title: req.body.title,
 			content: req.body.content,
-			author: req.user.id
+			author: res.locals.userId
 		});
 		// console.log(blog);
 		await blog.save();
-		models.userModel.findOneById(req.user.id, (err, user)=>{
-			if (err) throw err;
-			user.blogs.push(blog);
-			user.save();
-			console.log("New Blog saved");
-		});
+		console.log(res.locals.userId);
+		
+		const currUser= await models.userModel.findOne({_id : res.locals.userId});
+		console.log(currUser);
+		
+		currUser.blogs.push(blog);
+		currUser.save();
 		
 		res.redirect('/');
 	}catch(e){

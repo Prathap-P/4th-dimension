@@ -21,7 +21,7 @@ async function isAuthenticated(req, res, next){
 		const userLoggedIn= await jwt.verify(tokenToCheck, process.env.SECRET);
 
 		//If verification successfull, setting the header "user" with the logged in user's email
-		res.locals.user= userLoggedIn.email;
+		res.locals.userId= userLoggedIn.id;
 		// console.log(req.headers);
 		next();
 
@@ -33,12 +33,11 @@ async function isAuthenticated(req, res, next){
 
 
 authenRouter.get('/', isAuthenticated, async(req, res)=>{
-	var all_users;
-	all_users= await models.userModel.find().populate("blogs")
+	var all_users= await models.userModel.find().populate("blogs")
 
 	res.render('home', {
 		layout: userLayout,
-		authorized_user: res.locals.user,
+		authorized_userId: res.locals.userId,
 		all_users: all_users
 	});
 });
@@ -51,12 +50,12 @@ authenRouter.post('/register', async(req, res)=>{
 	var hashedPassword= await bcrypt.hash(req.body.password, 10);
 	// console.log(hashedPassword);
 	var newUser= {
-		username: req.body.username,
-		email: req.body.email,
+		username: String(req.body.username),
+		email: String(req.body.email),
 		password: hashedPassword
 	}
 
-	var user= new models.userModel(newUser);
+	var user= await new models.userModel(newUser);
 	
 	await user.save((err, User)=>{
 		if (err){
@@ -95,13 +94,14 @@ authenRouter.post('/login', async(req, res)=>{
 			throw new Error('Wrong Password');
 
 		//Password Matched, time to set the cookie
-		const tokenGenerated= jwt.sign({email : userEmail}, process.env.SECRET);
+		const tokenGenerated= jwt.sign({id : userFromDB.id}, process.env.SECRET);
 		res.cookie('token', tokenGenerated, {httpOnly : true});
 
 		// console.log(req);
 		res.redirect(req.query.redirect || '/');
 
 	}catch(e){
+		console.log(e);
 		res.redirect(req.url);
 
 	}

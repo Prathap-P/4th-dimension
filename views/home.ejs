@@ -12,7 +12,7 @@
 					<h3 class= "blog_title"><%= blog.title %><%= user.username %></h3>
 					<div class= "blog_content"><%= blog.content %></div>
 					
-					<% if(user.email === authorized_user.email){ %>
+					<% if(user.id === authorized_userId){ %>
 
 					<div class= "buttons">
 						<div>

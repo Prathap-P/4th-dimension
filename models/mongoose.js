@@ -52,12 +52,14 @@ module.exports= {
 	blogModel
 };
 
-// userModel.findOne({email: 'user@user'}).populate("blogs").exec((err, user)=>{
-	// console.log(user);
-// });
+(async()=>{	
+	userModel.find({ _id : '606dccd44ad36d16847843ba'}).populate("blogs").exec((err, user)=>{
+		console.log(user);
+	});
+})();
 	
-// userModel.deleteMany();
-// console.log("deleted")
+	// await userModel.deleteOne();
+	// console.log("deleted")
 
 // blogModel.find( (err, user) => {
 		
