@@ -1,0 +1,238 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"BLOG",
+				"blog_router"
+			],
+			[
+				"cook",
+				"cookieParser"
+			],
+			[
+				"userL",
+				"userLoggedIn"
+			],
+			[
+				"token",
+				"tokenToCheck"
+			],
+			[
+				"is",
+				"isAutheticated"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ter",
+				"Terminus: Toggle Panel"
+			],
+			[
+				"term",
+				"Terminus: Toggle Panel"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Arithmetic"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 474.0,
+		"history":
+		[
+			"npm run dev",
+			"1+2",
+			"/help",
+			"help",
+			"cds",
+			"cls",
+			"terminus",
+			"clear",
+			"cls"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/E/node/views/register.ejs",
+		"/E/node/views/login.ejs",
+		"/E/hydrogen-web/package.json",
+		"/E/node/views/newBlog.ejs",
+		"/E/node/main.js",
+		"/E/node/routes/blog_router.js",
+		"/E/node/routes/authentication.js",
+		"/E/node/views/layouts/userLayout.ejs",
+		"/E/node/public/js/bootstrap.min.js",
+		"/E/node/models/mongoose.js",
+		"/E/New folder/main.js",
+		"/E/node/package.json",
+		"/E/node/node_modules/bcrypt/README.md",
+		"/E/node/.gitignore",
+		"/E/node/.env",
+		"/E/node/views/partial/user_header.ejs",
+		"/E/node/views/partial/header.ejs",
+		"/E/New folder/public/register.html",
+		"/E/New folder/public/upload.html",
+		"/E/New folder/public/review.html",
+		"/E/New folder/node_modules/express/lib/application.js",
+		"/E/New folder/node_modules/statuses/index.js",
+		"/E/New folder/public/login.html",
+		"/E/New folder/public/index.html",
+		"/E/New folder/public/8aaeeb75da9403b3a994acf3475a0864",
+		"/E/New folder/node_modules/multer/index.js",
+		"/E/New folder/node_modules/multer/README.md",
+		"/C/Users/P Prathap/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/P Prathap/AppData/Roaming/Sublime Text 3/Packages/Terminus/Default.sublime-keymap"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 102.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 42.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "your_blogs.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 123.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

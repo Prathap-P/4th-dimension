@@ -6,7 +6,9 @@ var cookieParser= require('cookie-parser');
 var bcrypt= require('bcrypt');
 var models= require('../models/mongoose');
 
-const userLayout= 'layouts/userLayout';
+function getUserLayout(){
+	return 'layouts/userLayout';
+}
 
 async function isAuthenticated(req, res, next){
 
@@ -20,26 +22,32 @@ async function isAuthenticated(req, res, next){
 		//Verifying the cookie
 		const userLoggedIn= await jwt.verify(tokenToCheck, process.env.SECRET);
 
-		//If verification successfull, setting the header "user" with the logged in user's email
+		//If verification successfull, setting the locals with the logged in user's id
 		res.locals.userId= userLoggedIn.id;
 		// console.log(req.headers);
 		next();
 
 	}
 	catch(e){
-		res.redirect('/login' + `?redirect=${req.originalUrl}`);
+		res.redirect(`/login?redirect=${req.originalUrl}`);
 	}
 }
 
 
 authenRouter.get('/', isAuthenticated, async(req, res)=>{
-	var all_users= await models.userModel.find().populate("blogs")
+	try{
+		const all_users= await models.userModel.find().populate("blogs")
 
-	res.render('home', {
-		layout: userLayout,
-		authorized_userId: res.locals.userId,
-		all_users: all_users
-	});
+		res.render('home', {
+			layout: getUserLayout(),
+			authorized_userId: res.locals.userId,
+			all_users: all_users
+			}
+		);
+	}
+	catch(e){
+		console.log(e);
+	}
 });
 
 authenRouter.get('/register', (req, res)=>{
@@ -47,36 +55,34 @@ authenRouter.get('/register', (req, res)=>{
 });
 
 authenRouter.post('/register', async(req, res)=>{
-	var hashedPassword= await bcrypt.hash(req.body.password, 10);
-	// console.log(hashedPassword);
-	var newUser= {
-		username: String(req.body.username),
-		email: String(req.body.email),
-		password: hashedPassword
-	}
+	try{
+		
+		const hashedPassword= await bcrypt.hash(req.body.password, 10);
 
-	var user= await new models.userModel(newUser);
-	
-	await user.save((err, User)=>{
-		if (err){
-			console.log(err);
-			res.redirect('/register');
+		const newUser= {
+			username: String(req.body.username),
+			email: String(req.body.email),
+			password: hashedPassword
 		}
-		else{
-			res.redirect('/login');
-		}
-	});
+
+		const user= await new models.userModel(newUser);
+		await user.save();
+
+		res.redirect('/login');
+	}
+	catch(e){
+		res.redirect(req.originalUrl);
+		console.log(e);
+	}
 });
 
 
 authenRouter.get('/login', (req, res)=>{
-	// console.log(req);
 	res.render('login.ejs');
 });
 
 
 authenRouter.post('/login', async(req, res)=>{
-	// console.log(req.query);
 	const userEmail= req.body.email, userPassword= req.body.password;
 
 	try{
@@ -100,10 +106,10 @@ authenRouter.post('/login', async(req, res)=>{
 		// console.log(req);
 		res.redirect(req.query.redirect || '/');
 
-	}catch(e){
+	}
+	catch(e){
 		console.log(e);
 		res.redirect(req.url);
-
 	}
 
 });

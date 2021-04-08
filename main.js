@@ -25,7 +25,7 @@ app.use('/blogs', blog_routes);
 
 app.listen(
 	app.get('port'), ()=>{
-		console.log("App listening in port " + app.get("port"));
+		console.log(`App listening in port ${app.get("port")}`);
 	}); 
 
 

@@ -4,6 +4,7 @@ mongoose.connect('mongodb://localhost/blogs', { useUnifiedTopology: true, useNew
 .then((db)=> {
 	console.log("DataBase Connected");
 })
+.catch(err => console.log(err));
 
 mongoose.set('useCreateIndex', true);
 
@@ -52,11 +53,11 @@ module.exports= {
 	blogModel
 };
 
-(async()=>{	
-	userModel.find({ _id : '606dccd44ad36d16847843ba'}).populate("blogs").exec((err, user)=>{
-		console.log(user);
-	});
-})();
+// (async()=>{	
+	// userModel.find({ _id : '606dccd44ad36d16847843ba'}).populate("blogs").exec((err, user)=>{
+		// console.log(user);
+	// });
+// })();
 	
 	// await userModel.deleteOne();
 	// console.log("deleted")
