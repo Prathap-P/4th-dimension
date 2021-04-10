@@ -34,7 +34,7 @@ async function isAuthenticated(req, res, next){
 }
 
 
-authenRouter.get('/', isAuthenticated, async(req, res)=>{
+authenRouter.get('/', async(req, res)=>{
 	try{
 		const all_users= await models.userModel.find().populate("blogs")
 

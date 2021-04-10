@@ -1,0 +1,21 @@
+.info{
+	background-color: #e5e5e5;
+	/* border: 2px solid; */
+	height: 250px;
+}
+.info q{
+	font-family : cursive;
+}
+
+@keyframes toAndfro{
+	100% {transform : translate(-10px, 0px);}
+}
+
+.pointMotion{
+	animation: toAndfro 0.3s linear 0s infinite alternate;
+}
+
+.footer{
+	height: 200px;
+	color: #fff;
+}
