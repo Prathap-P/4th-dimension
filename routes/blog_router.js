@@ -5,23 +5,72 @@ var models= require('../models/mongoose');
 var isAuthenticated= require("./authentication").isAuthenticated;
 
 router.use(express.static('public'));
+router.use("/read", express.static('public'));
 
-router.get('/new', isAuthenticated, (req, res)=>{
+const distributor= {
+	getUserModel : ()=> models.userModel,
+	getBlogModel : ()=> models.blogModel,
+	getUserLayout : ()=> 'layouts/userLayout',
+	getGeneralLayout : ()=> 'layouts/generalLayout',
 	
-	var options= {
-		layout: 'layouts/userLayout'
+	chooseLayout: function(idLoggedIn){
+		if(idLoggedIn !== undefined)
+			return this.getUserLayout();
+		
+		return this.getGeneralLayout();
+	},
+
+	isCookieSet: (req, res, next)=> {
+		if(req.cookies['token'])
+			isAuthenticated(req, res, next);
+		else
+			next();
+	}
+}
+
+router.get('/', distributor.isCookieSet, async(req, res)=>{
+	try{
+		const blogsList= await distributor.getBlogModel().find().populate('author');
+
+		var options= {
+			layout: distributor.chooseLayout(res.locals.userId),
+			authorized_userId: res.locals.userId,
+			blogsList
+		};
+
+		res.render('allBlogs', options);
+	}
+	catch(e){
+		console.log(e);
 	}
 	
-	res.render('newBlog.ejs', options);
-})
+});
+
+router.get('/read/:id', distributor.isCookieSet, async(req, res)=>{
+	try{
+		const blogFound= await distributor.getBlogModel().findById({ _id: req.params.id }).populate('author');
+		
+		var options= {
+			layout: distributor.chooseLayout(res.locals.userId),
+			authorized_userId: res.locals.userId,
+			blog: blogFound
+		}
+
+		res.render('readBlog.ejs', options);
+	}
+	catch(e){
+		console.log(e);
+	}
+});
+
 
 router.get('/user', isAuthenticated, async(req, res)=>{
 	
 	try{
-		const curr_user= await models.userModel.findOneById(res.locals.userId).populate("blogs");
+		const curr_user= await models.userModel.findById(res.locals.userId).populate("blogs");
 		
 		var options= {
-			layout: 'layouts/userLayout',
+			layout: distributor.getUserLayout(),
 			curr_user
 		}
 		
@@ -32,6 +81,15 @@ router.get('/user', isAuthenticated, async(req, res)=>{
 	}
 })
 
+
+router.get('/new', isAuthenticated, (req, res)=>{
+	
+	var options= {
+		layout: 'layouts/userLayout'
+	}
+	
+	res.render('newBlog.ejs', options);
+})
 
 router.post('/new', isAuthenticated, async(req, res)=>{
 	try{
@@ -48,12 +106,13 @@ router.post('/new', isAuthenticated, async(req, res)=>{
 		currUser.blogs.push(blog);
 		await currUser.save();
 		
-		res.redirect('/');
+		res.redirect('/blogs');
 	}
 	catch(e){
 		console.log(e);
 	}
 })
+
 
 // router.delete("/delete/:id", (req, res)=>{
 	// userModel.findByIdAndDelete(id)

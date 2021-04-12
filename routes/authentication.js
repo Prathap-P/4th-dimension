@@ -39,7 +39,6 @@ authenRouter.get('/', async(req, res)=>{
 		const all_users= await models.userModel.find().populate("blogs")
 
 		res.render('home', {
-			layout: getUserLayout(),
 			authorized_userId: res.locals.userId,
 			all_users: all_users
 			}

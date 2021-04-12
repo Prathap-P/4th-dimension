@@ -6,23 +6,29 @@
 		<a href= '/blogs/new'>&#43</a>
 	</div>
 	<div>
-		<% all_users.forEach((user)=>{ 
-			user.blogs.forEach((blog)=>{ %>
-				<div class= "container col-11 col-lg-10 blog">
-					<h3 class= "blog_title"><%= blog.title %><%= user.username %></h3>
-					<div class= "blog_content"><%= blog.content %></div>
-					
-					<% if(user.id === authorized_userId){ %>
+	
+		<% blogsList.forEach((blog)=>{ %>
+		
+			<div class= "container col-11 col-lg-10 blog">
+				
+				<h3 class= "blog_title"><%= blog.title %> <%= blog.author.username %></h3>
+				<div class= "blog_content"><%= blog.content %></div>
 
-					<div class= "buttons">
-						<div>
-							<a href= "#" class= "btn btn-primary" data-id= <%= blog.id %> >Read More</a>
-						</div>
+				<div class= "buttons">
+					<div>
+						<a href= '/blogs/read/<%= blog.id %>' class= "" >Read More</a>
 					</div>
-
-					<% } %>
 				</div>
-			<% })
-		}) %>
+				
+				<% if(blog.author.id === authorized_userId){ %>
+					<span>
+						<i class="fas fa-trash-alt"></i>
+					</span>
+				<% } %>
+			
+			</div>
+			
+		<% }) %>
+		
 	</div>
 </div>

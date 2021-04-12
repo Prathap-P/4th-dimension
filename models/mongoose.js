@@ -54,12 +54,12 @@ module.exports= {
 };
 
 // (async()=>{	
-	// userModel.find({ _id : '606dccd44ad36d16847843ba'}).populate("blogs").exec((err, user)=>{
-		// console.log(user);
+	// await userModel.findOne().populate('author').exec((err, blog)=>{
+		// console.log(blog);
 	// });
 // })();
 	
-	// await userModel.deleteOne();
+	// await blogModel.deleteMany();
 	// console.log("deleted")
 
 // blogModel.find( (err, user) => {

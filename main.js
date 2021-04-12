@@ -1,4 +1,5 @@
 var express= require('express');
+var path= require('path');
 var app= express();
 require('dotenv').config();
 var layouts= require('express-ejs-layouts');
@@ -8,8 +9,8 @@ var body_parser= require('body-parser');
 var cookieParser= require('cookie-parser');
 
 
+app.use(express.static("public"));
 app.use(cookieParser());
-app.use(express.static('public'));
 
 app.set('port', 9000);
 app.set('views', __dirname + '/views');
