@@ -6,8 +6,24 @@ var cookieParser= require('cookie-parser');
 var bcrypt= require('bcrypt');
 var models= require('../models/mongoose');
 
-function getUserLayout(){
-	return 'layouts/userLayout';
+
+var distributor= {
+	getUserLayout : ()=> 'layouts/userLayout',
+	getGeneralLayout : ()=> 'layouts/generalLayout',
+
+	chooseLayout: function(idLoggedIn){
+		if(idLoggedIn !== undefined)
+			return this.getUserLayout();
+		
+		return this.getGeneralLayout();
+	},
+
+	isCookieSet: (req, res, next)=> {
+		if(req.cookies['token'])
+			isAuthenticated(req, res, next);
+		else
+			next();
+	}	
 }
 
 async function isAuthenticated(req, res, next){
@@ -29,16 +45,18 @@ async function isAuthenticated(req, res, next){
 
 	}
 	catch(e){
-		res.redirect(`/login?redirect=${req.originalUrl}`);
+		console.log(e);
+		res.redirect("/login?redirect=" + ((req.method === "GET") ? req.originalUrl : "/blogs"));
 	}
 }
 
 
-authenRouter.get('/', async(req, res)=>{
+authenRouter.get('/', distributor.isCookieSet, async(req, res)=>{
 	try{
 		const all_users= await models.userModel.find().populate("blogs")
 
 		res.render('home', {
+			layout: distributor.chooseLayout(res.locals.userId),
 			authorized_userId: res.locals.userId,
 			all_users: all_users
 			}

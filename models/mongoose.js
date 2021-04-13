@@ -53,8 +53,8 @@ module.exports= {
 	blogModel
 };
 
-// (async()=>{	
-	// await userModel.findOne().populate('author').exec((err, blog)=>{
+// (async()=>{
+	// await userModel.find().populate().exec((err, blog)=>{
 		// console.log(blog);
 	// });
 // })();

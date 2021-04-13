@@ -7,7 +7,7 @@ var isAuthenticated= require("./authentication").isAuthenticated;
 router.use(express.static('public'));
 router.use("/read", express.static('public'));
 
-const distributor= {
+var distributor= {
 	getUserModel : ()=> models.userModel,
 	getBlogModel : ()=> models.blogModel,
 	getUserLayout : ()=> 'layouts/userLayout',
@@ -26,12 +26,11 @@ const distributor= {
 		else
 			next();
 	}
-}
+};
 
 router.get('/', distributor.isCookieSet, async(req, res)=>{
 	try{
 		const blogsList= await distributor.getBlogModel().find().populate('author');
-
 		var options= {
 			layout: distributor.chooseLayout(res.locals.userId),
 			authorized_userId: res.locals.userId,
@@ -57,6 +56,27 @@ router.get('/read/:id', distributor.isCookieSet, async(req, res)=>{
 		}
 
 		res.render('readBlog.ejs', options);
+	}
+	catch(e){
+		console.log(e);
+	}
+});
+
+router.delete('/delete', isAuthenticated, async(req, res)=>{
+	try{
+		const blogToDelete= req.headers.blogid;
+		const blogInDB= await distributor.getBlogModel().findById(blogToDelete).populate("author");
+		const author= blogInDB.author;
+		
+		//check whether the logged in user is the author
+		if(author.id === res.locals.userId){
+			const deletedBlog= await blogInDB.delete();
+		}
+
+		else
+			res.status(402);
+			
+		res.end();
 	}
 	catch(e){
 		console.log(e);
@@ -121,6 +141,7 @@ router.post('/new', isAuthenticated, async(req, res)=>{
 
 
 module.exports= {
-	blogRouter : router	
+	blogRouter : router,
+	distributor
 };
 
