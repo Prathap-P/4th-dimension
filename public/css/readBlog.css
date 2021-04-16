@@ -1,0 +1,32 @@
+#main{
+	background-size: 100% 100%;
+	background-attachment: fixed;
+	background-image: url("../images/image1.jpeg");
+	padding: 7% 0% 6%;
+}
+
+#blogContainer{
+	background: white;
+	border-radius: 20px 20px;
+	width: 70%;
+}
+
+#blogContainer #heading{
+	margin: 4% 8% 0% 8%;
+}
+
+#blogContainer #content{
+	margin: 0% 8% 4% 8%;
+}
+
+
+@media(max-width : 430px){
+	h3{
+		font-size: 1.3rem !important;
+	}
+
+	#blogContainer div{
+		font-size: 1rem !important;
+	}
+
+}

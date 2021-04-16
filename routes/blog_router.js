@@ -94,7 +94,7 @@ router.get('/user', isAuthenticated, async(req, res)=>{
 			curr_user
 		}
 		
-		res.render('your_blogs.ejs', options);		
+		res.render('', options);		
 	}
 	catch(e){
 		console.log(e);
@@ -132,13 +132,6 @@ router.post('/new', isAuthenticated, async(req, res)=>{
 		console.log(e);
 	}
 })
-
-
-// router.delete("/delete/:id", (req, res)=>{
-	// userModel.findByIdAndDelete(id)
-		// .then(console.log("Blog deleted"));
-// });
-
 
 module.exports= {
 	blogRouter : router,

@@ -1,34 +1,31 @@
-<div class= "container col-10 mt-5">
-	<div class= "title col-12"> 
-		<span class=' offset-1'>
-			All Blogs
-		<span>
-		<a href= '/blogs/new'>&#43</a>
-	</div>
-	<div>
-	
-		<% blogsList.forEach((blog)=>{ %>
-		
-			<div class= "container col-11 col-lg-10 blog">
-				
-				<h3 class= "blog_title"><%= blog.title %> <%= blog.author.username %></h3>
-				<div class= "blog_content"><%= blog.content %></div>
+<link rel= 'stylesheet' type= 'text/css' href= 'css/allBlogs.css' />
 
-				<div class= "buttons">
-					<div>
-						<a href= '/blogs/read/<%= blog.id %>' class= "" >Read More</a>
-					</div>
+<div id= "main" class= "d-flex align-items-center justify-content-center align-items-center">
+	<div id= "mainContainer" class= "container d-flex-reverse col-sm-9 col-10">
+		
+		<div class= "container d-flex justify-content-between" id= "topSection"> 
+			<h2 class= "p-3">
+				Every content you need...
+			</h2>
+			<div class= "p-3 d-flex align-items-center">
+				<a href= '/blogs/new' ><i class="fas fa-pencil-alt h5"></i></a>
+			</div>
+		</div>
+
+		<div id= "blogsContainer">
+			<% blogsList.forEach((blog)=>{ %>
+			
+				<div class= "m-4 mb-5 p-4 singleBlog">
+					
+					<h3 class= "blog_title" ><%= blog.title %></h3>
+					<p class= "text-muted mb-0" >@ <%= blog.author.username %></p>
+					<div class= "blogContent" ><%= blog.content %></div>
+					<a href= '/blogs/read/<%= blog.id %>' class= "" >Read More</a>
+				
 				</div>
 				
-				<% if(blog.author.id === authorized_userId){ %>
-					<span>
-						<i class="fas fa-trash-alt"></i>
-					</span>
-				<% } %>
+			<% }) %>
 			
-			</div>
-			
-		<% }) %>
-		
+		</div>
 	</div>
 </div>

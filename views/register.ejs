@@ -1,30 +1,51 @@
+<style>
+	#form{
+		box-shadow: 20px 20px 80px;
+		border-radius: 30px 30px;
+	}
 
-<form method= 'POST' class= 'container d-flex flex-column col-md-6 col-8 mt-5'>
+	@media(max-width : 770px){
+		#form{
+			font-size: 1rem;
+			border-radius: 40px 40px;
+		}
+		#form > h2{
+			font-size: 1.6rem;
+		}
+	}
 
-	<h2 class= 'text-center mb-3'>
-		Register
-	</h2>
-	
-	<div class= 'form-group row col-md-10 offset-md-1 col-10 offset-1'>
-		<input type= 'text' placeholder= 'Your Username' name= 	'username' class= 'form-control' autofocus required>
-	</div>
+</style>
 
-	<div class= 'form-group row col-md-10 offset-md-1 col-10 offset-1'>
-		<input type= 'email' placeholder= 'Your Email ID' name= 'email' class= 'form-control'  required>
-	</div>
+<div class= "d-flex justify-content-center m-5 h5">
 
-	<div class= 'form-group row col-md-10 offset-md-1 col-10 offset-1'>
-		<input type= 'password' placeholder= 'Your password' name= 'password' required class= 'form-control'>
-	</div>
+	<form method= 'POST' class= 'container p-4 col-lg-4 col-md-6' id= "form">
 
-	<div class= 'text-center mb-3'>
-		Already registered? <a href= '/login'>Login</a>
-	</div>
-	
-	<div class= 'form-group row'>
-		<button type= 'submit' class= 'col-md-4 offset-md-4 btn btn-primary col-6 offset-3'>Submit</button>
-	</div>
+		<h2 class= 'text-center mb-4'>
+			Register
+		</h2>
 
-	
+		<div class= 'form-group'>
+			<label for= "username">Username</label>
+			<input type= 'text' placeholder= 'Your Username' name= 	'username' class= 'form-control' autofocus required>
+		</div>
+		
+		<div class= 'form-group'>
+			<label for= "email">Email</label>
+			<input type= 'email' placeholder= 'Your Email ID' name= 'email' class= 'form-control'  required>
+		</div>
 
-</form>
+		<div class= 'form-group'>
+			<label for= "password">Password</label>
+			<input type= 'password' placeholder= 'Your password' name= 'password' required class= 'form-control'>
+		</div>
+
+		<div class= 'text-center mb-3'>
+			Already registered? <a href= '/login'>Login</a>
+		</div>
+		
+		<div class= 'form-group row'>
+			<button type= 'submit' class= 'col-md-4 offset-md-4 btn btn-primary col-6 offset-3'>Submit</button>
+		</div>
+
+	</form>
+</div>

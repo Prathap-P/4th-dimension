@@ -1,8 +1,25 @@
+<link rel= 'stylesheet' type= 'text/css' href= 'css/newBlog.css' />
 
-<form method= 'POST' class= 'container col-md-6 col-8 mt-5'>
-	<label>Title</label>
-	<input type= 'text' name= 'title' required>
-	<label>Content</label>
-	<textarea name= 'content'> </textarea>
-	<button type= 'submit'>Post</button>
-</form>
+<div id= "main" class= "d-flex justify-content-center align-items-center">
+	<div id= "formContainer" class= "p-3 col-sm-9 col-10" >
+
+		<form method= 'POST' class= 'container'>
+			<div class= "form-group">
+				<label class= "h5">Title</label>
+				<input type= 'text' name= 'title' required class= "form-control">	
+			</div>
+
+			<div class= "form-group">
+				<label class= "h5">Content</label>
+				<textarea name= 'content' class= "form-control" rows= "10"> </textarea>
+			<div>
+
+			<div class= "mt-4">
+				<button type= 'submit' class= "btn btn-primary">Post</button>
+			</div>
+		</form>
+		
+	</div>
+	
+</div>
+

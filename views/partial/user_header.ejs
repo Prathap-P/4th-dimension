@@ -1,4 +1,15 @@
-	
+<style>
+	@keyframes zoomInOut{
+		100%{
+			transform: scale(1.1, 1.1);
+		} 
+	}
+
+	nav > .navbar-brand{
+		animation: zoomInOut 1s linear 0s infinite alternate;
+	}
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-light shadow">
 	<a class="navbar-brand font-weight-bolder" href="/">
 		<strong class= "h2 font-weight-bolder">4</strong>th Dimension
@@ -11,19 +22,34 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 	
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item active">
+			<li class="nav-item" id= "home">
 				<a class="nav-link" href="/">Home
 				</a>
 			</li>
 		  
-			<li class="nav-item">
-				<a class="nav-link" href="/blogs/profile" >Profile</a>
+			<li class="nav-item" id= "blogs">
+				<a class="nav-link" href="/blogs" >Blogs</a>
 			</li>
 		  
-			<li class="nav-item ">
+			<li class="nav-item">
 				<a class="nav-link" href="/logout" >Logout</a>
 			</li>
 		</ul>
 	
 	</div>
+
+	<script defer>
+		//adding active class name
+		
+		var homeItem= document.querySelector("#home");
+		var blogsItem= document.querySelector("#blogs");
+			
+		if(document.location.pathname.includes("/blogs"))
+			blogsItem.className += " active font-weight-bold";
+
+		else
+			homeItem.className += " active font-weight-bold";
+	
+	</script>
+
 </nav>

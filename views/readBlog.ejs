@@ -1,14 +1,22 @@
-<div class= "container col-10 mt-5">
-	<div class= "title col-12"> 
-		<h3 class= "blog_title"><%= blog.title %> <%= blog.author.username %></h3>
-	</div>
-	<div>
-		<div class= "blog_content"><%= blog.content %></div>
-		
-			<% if(blog.author.id === authorized_userId){ %>
-				<span id= "deleteBlog" ><i class="fas fa-trash-alt"></i>
-				</span>
-			<% } %>
+<link rel= 'stylesheet' type= 'text/css' href= 'css/readBlog.css' />
+
+<div id= "main" class= "d-flex justify-content-center ">
+	<div id= "blogContainer" class= "col-sm-9 col-10">
+
+		<div id= "heading"> 
+			<h3 class= "text-center"><%= blog.title %></h3>
+			
+			<div class= "d-flex justify-content-between">
+				<p class= "text-muted mb-1">@ <%= blog.author.username %> </p>
+				<% if(blog.author.id === authorized_userId){ %>
+					<span id= "deleteBlog" ><i class="fas fa-trash-alt"></i>
+					</span>
+				<% } %>
+			</div>		
+
+		</div>
+
+		<div id= "content" class= "h5"><%= blog.content %></div>
 		
 	</div>
 	

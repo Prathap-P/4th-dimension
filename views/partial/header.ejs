@@ -1,3 +1,14 @@
+<style>
+	@keyframes zoomInOut{
+		100%{
+			transform: scale(1.1, 1.1);
+		} 
+	}
+
+	nav > .navbar-brand{
+		animation: zoomInOut 1s linear 0s infinite alternate;
+	}
+</style>
 
 <nav class="navbar navbar-expand-lg navbar-light shadow">
 	<a class="navbar-brand font-weight-bolder" href="/">
@@ -14,7 +25,11 @@
 			<li class="nav-item" id= "home">
 				<a class="nav-link " href="/">Home</a>
 			</li>
-		
+
+			<li class="nav-item" id= "blogs">
+				<a class="nav-link" href="/blogs" >Blogs</a>
+			</li>
+
 			<li class="nav-item" id= "login">
 				<a class="nav-link " href="/login">Login</a>
 			</li>
@@ -30,6 +45,7 @@
 		//adding active class name
 		
 		var homeItem= document.querySelector("#home");
+		var blogsItem= document.querySelector("#blogs");
 		var loginItem= document.querySelector("#login");
 		var registerItem= document.querySelector("#register");
 			
@@ -38,6 +54,9 @@
 		
 		else if(document.location.pathname.includes("/register"))
 			registerItem.className += " active font-weight-bold";
+
+		else if(document.location.pathname.includes("/blogs"))
+			blogsItem.className += " active font-weight-bold";
 
 		else
 			homeItem.className += " active font-weight-bold";
