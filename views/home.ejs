@@ -1,6 +1,6 @@
 <link rel= 'stylesheet' type= 'text/css' href= 'css/homepage.css' />
 	
-<div id="carousel-name" class="d-none carousel slide" data-pause= "hover" data-ride="carousel">
+<div id="carousel-name" class="carousel slide" data-pause= "hover" data-ride="carousel">
 	
 	<ol class="carousel-indicators">
 		<li data-target="#carousel-name" data-slide-to="0" class="active"></li>
@@ -9,31 +9,27 @@
 	</ol>
 
 	<div class="carousel-inner" role="listbox">
-		<div class="carousel-item ">
-			<img class=" img-fluid" src="./images/image1.jpeg" alt="First slide">
+		<div class="carousel-item active">
+			<img class="img-fluid"  id= "slide1">
 			
-			<div class="carousel-caption d-none d-md-block">
-				<p>The first step in blogging is not writing them but reading them. ~Jeff Jarvis</p>
+			<div class="carousel-caption  d-md-block blockquote">
+				<p>"The first step in blogging is not writing them but reading them." -Jeff Jarvis</p>
 			</div>
 		</div>
 		
-		<div class="carousel-item active">
-			<img class="img-fluid" src="./images/image1.jpeg" alt="Second slide">
+		<div class="carousel-item ">
+			<img class="img-fluid" id="slide2">
 			
-			<div class="carousel-caption d-none d-md-block">
-				<h3>Carousel Slider Title</h3>
-				<p>Description text to further describe the content of the slide image</p>
-				<a href="" class="btn btn-primary">Call to Action</a>
+			<div class="carousel-caption  d-md-block blockquote">
+				<p>“Blogging is to writing what extreme sports are to athletics: more free-form, more accident-prone, more alive.” – Andrew Sullivan</p>
 			</div>
 		</div>
 		
 		<div class="carousel-item">
-			<img class="img-fluid" src="./images/image1.jpeg" alt="Third slide">
+			<img class="img-fluid" id="slide3">
 			
-			<div class="carousel-caption d-none d-md-block">
-				<h3>Carousel Slider Title</h3>
-				<p>Description text to further describe the content of the slide image</p>
-				<a href="" class="btn btn-primary">Call to Action</a>
+			<div class="carousel-caption d-md-block blockquote">
+				<p>“When you brand yourself properly, the competition becomes irrelevant.” – Dan Schawbel</p>
 			</div>
 		</div>
 	</div>
@@ -69,7 +65,7 @@
 </div>
 
 <div class= "bg-dark footer d-flex align-items-center justify-content-center">
-	<div class= "text-center h5">
+	<div class= "text-center h4 ">
 		Not in the mood?
 		<i class="fas fa-tired"></i>
 		<i class="fas fa-tired"></i>
@@ -79,5 +75,13 @@
 	</div>
 </div>
 
+<script defer>
+	var slide1= document.querySelector("#slide1");
+	var slide2= document.querySelector("#slide2");
+	var slide3= document.querySelector("#slide3");
 
+	slide1.src = "./images/" + Math.ceil(Math.random() * 13) + ".jpg";
+	slide2.src = "./images/" + Math.ceil(Math.random() * 13) + ".jpg";
+	slide3.src = "./images/" + Math.ceil(Math.random() * 13) + ".jpg";
 
+</script>

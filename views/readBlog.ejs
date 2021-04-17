@@ -1,6 +1,6 @@
 <link rel= 'stylesheet' type= 'text/css' href= 'css/readBlog.css' />
 
-<div id= "main" class= "d-flex justify-content-center ">
+<div id= "main" class= "d-flex justify-content-center align-items-center">
 	<div id= "blogContainer" class= "col-sm-9 col-10">
 
 		<div id= "heading"> 
@@ -23,7 +23,10 @@
 </div>
 
 
-<script>
+<script defer>
+	var mainContainer= document.querySelector("#main");
+	mainContainer.style.backgroundImage = "url(./images/" + Math.ceil(Math.random() * 13) + ".jpg)";
+
 	var deleteIcon= document.querySelector("#deleteBlog");
 	
 	deleteIcon.addEventListener("click", async(event) => {

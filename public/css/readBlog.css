@@ -3,6 +3,7 @@
 	background-attachment: fixed;
 	background-image: url("../images/image1.jpeg");
 	padding: 7% 0% 6%;
+	min-height: 90%;
 }
 
 #blogContainer{

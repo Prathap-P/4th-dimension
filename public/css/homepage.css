@@ -1,10 +1,26 @@
 .info{
 	background-color: #e5e5e5;
-	/* border: 2px solid; */
-	height: 250px;
+	height: 350px;
 }
+
 .info q{
 	font-family : cursive;
+}
+
+.img-fluid{
+	height: 400px;
+	width: 100%;
+}
+
+@media(min-width: 750px){
+	.img-fluid{
+		height: 700px;
+		margin-top: -100px;
+	}
+
+	.carousel-caption{
+		font-size: 2rem;
+	}
 }
 
 @keyframes toAndfro{
