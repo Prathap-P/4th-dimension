@@ -1,7 +1,6 @@
 var express= require('express');
 var path= require('path');
 var app= express();
-require('dotenv').config();
 var layouts= require('express-ejs-layouts');
 var authenRouter= require('./routes/authentication').authenRouter;
 var blog_routes= require('./routes/blog_router').blogRouter;
@@ -12,7 +11,7 @@ var cookieParser= require('cookie-parser');
 app.use(express.static("public"));
 app.use(cookieParser());
 
-app.set('port', 9000);
+app.set('port', process.env.PORT || 9000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.set('layout', 'layouts/generalLayout');
