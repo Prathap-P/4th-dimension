@@ -29,29 +29,29 @@
 
 	var deleteIcon= document.querySelector("#deleteBlog");
 	
-	deleteIcon.addEventListener("click", async(event) => {
-		var pathname= document.location.pathname;
-		var blogId= pathname.split("/")[3];
-	
-		var options= {
-			method: 'DELETE',
-			headers: {
-				blogid : blogId
+	if(deleteIcon !== null){
+		deleteIcon.addEventListener("click", async(event) => {
+			var pathname= document.location.pathname;
+			var blogId= pathname.split("/")[3];
+		
+			var options= {
+				method: 'DELETE',
+				headers: {
+					blogid : blogId
+				}
 			}
-		}
+		
+			var response= await fetch(`/blogs/delete`, options);
 	
-		var response= await fetch(`/blogs/delete`, options);
-
-		if(response.ok)
-			document.location.href= "/blogs";
-		else
-			document.location.reload();
-	
-	});
+			if(response.ok)
+				document.location.href= "/blogs";
+			else
+				document.location.reload();
+		
+		});
+	}
 	
 </script>
-
-<script defer src= "./registerWorker.js"></script>
 
 
 

@@ -5,24 +5,25 @@ self.addEventListener("install", (event) => {
         caches.open('v1')
         .then(cachV1 => {
             return cachV1.addAll([
-                "/blogs/",
-                "/blogs/css/bootstrap.min.css",
-                "/blogs/allBlogs.css",                
-                "/blogs/js/jquery.js",                
-                "/blogs/js/bootstrap.min.js",
-                "/blogs/images/1.jpg",
-                "/blogs/images/2.jpg",
-                "/blogs/images/3.jpg",
-                "/blogs/images/4.jpg",
-                "/blogs/images/5.jpg",
-                "/blogs/images/6.jpg",
-                "/blogs/images/7.jpg",
-                "/blogs/images/8.jpg",
-                "/blogs/images/9.jpg",
-                "/blogs/images/10.jpg",
-                "/blogs/images/11.jpg",
-                "/blogs/images/12.jpg",
-                "/blogs/images/13.jpg"
+                "/recoveryFile.html",
+                "/blogs/read/css/readBlog.css",
+                "/blogs/read/css/bootstrap.min.css",
+                "/blogs/read/js/jquery.js",                
+                "/blogs/read/js/bootstrap.min.js",
+                "/blogs/read/fontawesome/css/all.css",
+                "/blogs/read/images/1.jpg",
+                "/blogs/read/images/2.jpg",
+                "/blogs/read/images/3.jpg",
+                "/blogs/read/images/4.jpg",
+                "/blogs/read/images/5.jpg",
+                "/blogs/read/images/6.jpg",
+                "/blogs/read/images/7.jpg",
+                "/blogs/read/images/8.jpg",
+                "/blogs/read/images/9.jpg",
+                "/blogs/read/images/10.jpg",
+                "/blogs/read/images/11.jpg",
+                "/blogs/read/images/12.jpg",
+                "/blogs/read/images/13.jpg"
             ])
         })
         .catch(err => console.log("Error : " + err))
@@ -33,14 +34,19 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request)
         .then(cachedResponse => {
-            return (cachedResponse ||  fetch(event.request)
+            return (cachedResponse ||  
+                fetch(event.request)
                 .then(response => {
+                    const clonedRes= response.clone();
+                    
                     caches.open('v1')
-                    .then(cachV1 => cachV1.put(event.request, response.clone()))
+                    .then(cachV1 => {
+                        return cachV1.put(event.request, clonedRes);
+                    })
                     return response;
                 })
             )
         })
-        .catch(err => console.log("Error : " + err))
+        .catch(err => caches.match("/recoveryFile.html"))
     );
 })
