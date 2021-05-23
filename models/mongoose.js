@@ -1,7 +1,7 @@
 const mongoose= require('mongoose');
 require('dotenv').config();
 
-const mongoUrl= (process.env.NODE_ENV) ? process.env.LOCAL_MONGO : process.env.MONGO_URI;
+const mongoUrl= (process.env.NODE_ENV.trim() === "development") ? process.env.LOCAL_MONGO : process.env.MONGO_URI;
 
 mongoose.connect(mongoUrl, { useUnifiedTopology: true, useNewUrlParser: true })
 .then((db)=> {
@@ -55,17 +55,3 @@ module.exports= {
 	userModel,
 	blogModel
 };
-
-// (async()=>{
-	// await userModel.find().populate().exec((err, blog)=>{
-		// console.log(blog);
-	// });
-// })();
-	
-	// await blogModel.deleteMany();
-	// console.log("deleted")
-
-// blogModel.find( (err, user) => {
-		
-	// console.log(user[0].id)
-// });
